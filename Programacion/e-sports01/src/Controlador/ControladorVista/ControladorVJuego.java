@@ -6,17 +6,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
+/**
+ * Controlador para la ventana de gestión de juegos.
+ */
 public class ControladorVJuego {
 
     private ControladorVista cv;
     private Connection con;
     private VentanaJuegos vJuegos;
 
-
+    /**
+     * Constructor de ControladorVJuego.
+     * @param cv ControladorVista asociado.
+     */
     public ControladorVJuego(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Método para crear y mostrar la ventana de juegos.
+     */
     public void crearMostrar() {
         vJuegos = new VentanaJuegos();
         vJuegos.setVisible(true);
@@ -31,6 +40,10 @@ public class ControladorVJuego {
         vJuegos.getpEditar().setVisible(false);
         vJuegos.getpEliminar().setVisible(false);
     }
+
+    /**
+     * ActionListener para el botón de volver.
+     */
     public class BVolverAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -38,6 +51,10 @@ public class ControladorVJuego {
             vJuegos.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de inicio.
+     */
     public class BInicioAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -45,6 +62,10 @@ public class ControladorVJuego {
             vJuegos.dispose();
         }
     }
+
+    /**
+     * ActionListener para el radio button de nuevo.
+     */
     public class RbNuevoAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -56,6 +77,10 @@ public class ControladorVJuego {
             }
         }
     }
+
+    /**
+     * ActionListener para el radio button de editar.
+     */
     public class RbEditarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -67,6 +92,10 @@ public class ControladorVJuego {
             }
         }
     }
+
+    /**
+     * ActionListener para el radio button de eliminar.
+     */
     public class RbEliminarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -79,3 +108,4 @@ public class ControladorVJuego {
         }
     }
 }
+

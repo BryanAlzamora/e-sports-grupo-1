@@ -17,17 +17,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador para la ventana de gestión de jugadores.
+ */
 public class ControladorVJugador {
 
     private ControladorVista cv;
     private Connection con;
     private VentanaJugadores vJugadores;
 
-
+    /**
+     * Constructor de ControladorVJugador.
+     * @param cv ControladorVista asociado.
+     */
     public ControladorVJugador(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Método para crear y mostrar la ventana de jugadores.
+     */
     public void crearMostrar() {
         vJugadores = new VentanaJugadores();
         vJugadores.setVisible(true);
@@ -49,6 +58,10 @@ public class ControladorVJugador {
         llenarComboEquipoNuevo();
         llenarComboEquipoEditar();
     }
+
+    /**
+     * ActionListener para el botón de volver.
+     */
     public class BVolverAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -57,6 +70,9 @@ public class ControladorVJugador {
         }
     }
 
+    /**
+     * ActionListener para el botón de inicio.
+     */
     public class BInicioAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -65,6 +81,9 @@ public class ControladorVJugador {
         }
     }
 
+    /**
+     * ActionListener para el radio button de nuevo.
+     */
     public class RbNuevoAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -73,13 +92,13 @@ public class ControladorVJugador {
                 vJugadores.getpNuevo().setVisible(true);
                 vJugadores.getpEditar().setVisible(false);
                 vJugadores.getpEliminar().setVisible(false);
-
             }
-
-
-
         }
     }
+
+    /**
+     * ActionListener para el botón de aceptar.
+     */
     public class addBotonAceptar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -100,17 +119,14 @@ public class ControladorVJugador {
                     Usuario anadirJugador = cv.crearJugador(nombre, primerApellido, segundoApellido, sueldo, nacionalidad, fechaNacimiento, nickname, rol, equipo);
 
                 }
-               else if (vJugadores.getRbEliminar().isSelected()) {
+                else if (vJugadores.getRbEliminar().isSelected()) {
                     // Lógica para eliminar un jugador
                     String nombre = (String) vJugadores.getCbJugador().getSelectedItem();
                     String equipo = (String) vJugadores.getCbEquipoElim().getSelectedItem();
                     cv.eliminarJugador(nombre, equipo);
-
-
                 }
-               else if (vJugadores.getRbEditar().isSelected())
+                else if (vJugadores.getRbEditar().isSelected())
                 {
-
                     String nombre = vJugadores.getTfNuevoNombre().getText();
                     String primerApellido = vJugadores.getTfNuevoApellido1().getText();
                     String segundoApellido = vJugadores.getTfNuevoApellido2().getText();
@@ -130,23 +146,23 @@ public class ControladorVJugador {
         }
     }
 
-
-
+    /**
+     * FocusListener para la JComboBox de equipo a eliminar.
+     */
     public class ComboEquipoElimFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
-            // No action on focus gain
+            // No se realiza ninguna acción cuando se gana el enfoque
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-            vJugadores.getCbJugador().removeAllItems(); // Clear existing items
+            vJugadores.getCbJugador().removeAllItems(); // Limpiar elementos existentes
             try {
                 String equiposelecionado = (String) vJugadores.getCbEquipoElim().getSelectedItem();
                 if (equiposelecionado != null && !equiposelecionado.isEmpty()) {
                     List<Jugador> jugadores = cv.llenarJugadoresNombre(equiposelecionado);
                     jugadores.forEach(jugador -> vJugadores.getCbJugador().addItem(jugador.getNombre()));
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un equipo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -155,11 +171,13 @@ public class ControladorVJugador {
             }
         }
     }
-//esto es el focus lost de editar
+
+    // Este es el FocusListener para la edición
+
     public class ComboNombreJugadoresEditar implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
-            // No action on focus gain
+            // No se realiza ninguna acción cuando se gana el enfoque
         }
 
         @Override
@@ -171,7 +189,6 @@ public class ControladorVJugador {
                 if (equiposelecionado != null && !equiposelecionado.isEmpty()) {
                     List<Jugador> jugadores = cv.llenarJugadoresNombre(equiposelecionado);
                     jugadores.forEach(jugador -> vJugadores.getCbEditJugadores().addItem(jugador.getNombre()));
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un equipo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -181,9 +198,11 @@ public class ControladorVJugador {
         }
     }
 
+    // En tu método crearMostrar o constructor donde configuras los listeners:
 
-// In your crearMostrar method or constructor where you setup listeners:
-
+    /**
+     * ActionListener para el radio button de editar.
+     */
     public class RbEditarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -195,6 +214,10 @@ public class ControladorVJugador {
             }
         }
     }
+
+    /**
+     * ActionListener para el radio button de eliminar.
+     */
     public class RbEliminarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -206,77 +229,73 @@ public class ControladorVJugador {
             }
         }
     }
+
+    /**
+     * Método para llenar la JComboBox de equipos.
+     */
     public void llenarComboEquipo(){
-
-
-
         String nombre = null;
         try {
             ArrayList<Equipo> listaEquipos = cv.selectEquipo(nombre);
             listaEquipos.forEach(o-> vJugadores.getCbEquipo().addItem(o.getNombre()));
-
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
+
+    /**
+     * Método para llenar la JComboBox de equipos a eliminar.
+     */
     public void llenarComboEquipoEliminar(){
-
-
-
         String nombre = null;
         try {
             ArrayList<Equipo> listaEquipos = cv.selectEquipo(nombre);
             listaEquipos.forEach(o-> vJugadores.getCbEquipoElim().addItem(o.getNombre()));
-
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
+
+    /**
+     * Método para llenar la JComboBox de equipos al crear un nuevo jugador.
+     */
     public void llenarComboEquipoNuevo(){
-
-
-
         String nombre = null;
         try {
             ArrayList<Equipo> listaEquipos = cv.selectEquipo(nombre);
-
             listaEquipos.forEach(o-> vJugadores.getCbEquipoNuevo().addItem(o.getNombre()));
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
+
+    /**
+     * Método para llenar la JComboBox de equipos al editar un jugador.
+     */
     public void llenarComboEquipoEditar(){
-
-
-
         String nombre = null;
         try {
             ArrayList<Equipo> listaEquipos = cv.selectEquipo(nombre);
-
             listaEquipos.forEach(o-> vJugadores.getCbNuevoEquipo().addItem(o.getNombre()));
-
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
 
+    // Este es el FocusListener para cargar automáticamente la JComboBox de jugadores cuando se llama desde el equipo
 
-
-    //aqui se buscan todos los datos de ese jugador
+    /**
+     * FocusListener para cargar automáticamente la JComboBox de jugadores cuando se llama desde el equipo.
+     */
     public class ComboEditJugadoresFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
-            // No action on focus gain
+            // No se realiza ninguna acción cuando se gana el enfoque
         }
 
         @Override
         public void focusLost(FocusEvent e) {
-
             try {
-
                 // Obtener el jugador seleccionado en la JComboBox
                 String nombreJugador = (String) vJugadores.getCbEditJugadores().getSelectedItem();
 
@@ -286,12 +305,10 @@ public class ControladorVJugador {
                     String equipo = (String) vJugadores.getCbEquipoEditar().getSelectedItem();
 
                     // Enviar los datos al controlador de base de datos
-                   Jugador buscarDatos= cv.actualizarJugador(nombreJugador,equipo);
-
-
+                    Jugador buscarDatos= cv.actualizarJugador(nombreJugador,equipo);
 
                     vJugadores.getTfNuevoNombre().setText(buscarDatos.getNombre());
-                   vJugadores.getTfNuevoApellido1().setText(buscarDatos.getApellido1());
+                    vJugadores.getTfNuevoApellido1().setText(buscarDatos.getApellido1());
                     vJugadores.getTfNuevoApellido2().setText(buscarDatos.getApellido2());
                     DecimalFormat formatter2 = new DecimalFormat("#");
                     formatter2.setGroupingUsed(false); // Desactiva el uso de separadores de grupo (comas)
@@ -303,10 +320,7 @@ public class ControladorVJugador {
                     vJugadores.getTfNuevaFechaNac().setText(fechaFormateada);
                     vJugadores.getTfNuevoNick().setText(buscarDatos.getNickname());
                     vJugadores.getCbNuevoRol().addItem(buscarDatos.getRol());
-
                     vJugadores.getCbNuevoEquipo().setSelectedItem(vJugadores.getCbEquipoEditar().getSelectedItem());
-
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un jugador válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -316,8 +330,10 @@ public class ControladorVJugador {
         }
     }
 
-//esto es el relleno automatico de la combo box de el jugador cuando es llamado por el quipo
-
+    /**
+     * Método para agregar el nombre de equipo a la JComboBox de equipo nuevo y deshabilitarla.
+     * @param nombre Nombre del equipo a agregar.
+     */
     public void nombreEquipo(String nombre){
         vJugadores.getCbEquipoNuevo().addItem(nombre);
         vJugadores.getCbEquipoNuevo().setSelectedItem(nombre);

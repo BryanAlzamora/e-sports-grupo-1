@@ -1,3 +1,6 @@
+/**
+ * Controlador para la visualización de la última jornada de una competición.
+ */
 package Controlador.ControladorVista;
 
 import Modelo.Competicion;
@@ -16,10 +19,17 @@ public class ControladorVUltJornada {
     private VentanaUltJornada vUltJornada;
     private List<String> listaCompeticiones;
 
+    /**
+     * Constructor de ControladorVUltJornada.
+     * @param cv ControladorVista asociado.
+     */
     public ControladorVUltJornada(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Crea y muestra la ventana para visualizar la última jornada de una competición.
+     */
     public void crearMostrar() {
         vUltJornada = new VentanaUltJornada();
         vUltJornada.setVisible(true);
@@ -32,6 +42,9 @@ public class ControladorVUltJornada {
         vUltJornada.getCbCompeticiones().setSelectedIndex(-1);
     }
 
+    /**
+     * Llena el combo de competiciones con las disponibles.
+     */
     public void llenarComboCompeticiones() {
         try {
             listaCompeticiones = cv.buscarCompeticiones();
@@ -44,6 +57,9 @@ public class ControladorVUltJornada {
         }
     }
 
+    /**
+     * ActionListener para el botón de inicio.
+     */
     public class BInicioAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -53,15 +69,16 @@ public class ControladorVUltJornada {
         }
     }
 
+    /**
+     * ActionListener para el combo de competiciones.
+     */
     public class BCompeticionAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 String nombreCompeticion = (String) vUltJornada.getCbCompeticiones().getSelectedItem();
                 if (nombreCompeticion != null) {
-                    System.out.println(nombreCompeticion);
                     Competicion competicion = cv.buscarCompeticion(nombreCompeticion);
-                    System.out.println(competicion.getIdCompeticion());
                     mostrarEnfrentamientosUltimaJornada(competicion);
                 }
             } catch (Exception ex) {
@@ -70,11 +87,14 @@ public class ControladorVUltJornada {
         }
     }
 
+    /**
+     * Muestra los enfrentamientos de la última jornada de una competición.
+     * @param competicion Competición de la que se desea mostrar la última jornada.
+     */
     public void mostrarEnfrentamientosUltimaJornada(Competicion competicion) {
         try {
-            System.out.println("Competicion " + competicion.getIdCompeticion());
             Integer competicionID = competicion.getIdCompeticion();
-            Integer ultimaJornada = cv.buscarUltimaJornada(competicionID); // Método que retorna la última jornada de la competición
+            Integer ultimaJornada = cv.buscarUltimaJornada(competicionID);
             if (ultimaJornada != null) {
                 List<Enfrentamiento> enfrentamientos = cv.buscarEnfrentamientos(ultimaJornada, competicionID);
 
@@ -90,7 +110,6 @@ public class ControladorVUltJornada {
                     System.out.println("No se encontraron enfrentamientos para la última jornada.");
                 }
 
-                // Volver a validar y repintar el panel principal en la vista
                 vUltJornada.actualizarVista();
             } else {
                 System.out.println("No se encontró la última jornada para la competición.");
@@ -100,10 +119,15 @@ public class ControladorVUltJornada {
         }
     }
 
+    /**
+     * Crea un panel para visualizar un enfrentamiento.
+     * @param enfrentamiento Enfrentamiento a visualizar.
+     * @return Panel de visualización del enfrentamiento.
+     */
     private JPanel crearPanelEnfrentamiento(Enfrentamiento enfrentamiento) {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(400, 50));
-        panel.setBackground(new Color(0, 255, 185)); // Establecer el color de fondo
+        panel.setBackground(new Color(0, 255, 185));
 
         JLabel equipo1 = new JLabel(enfrentamiento.getEquipoUno().getNombre());
         JLabel equipo2 = new JLabel(enfrentamiento.getEquipoDos().getNombre());
@@ -112,7 +136,7 @@ public class ControladorVUltJornada {
         JLabel guion = new JLabel("-");
 
         Font font = new Font("Michroma", Font.PLAIN, 22);
-        Color colorFuente = new Color(46, 47, 47); // Color de fuente RGB (46, 47, 47)
+        Color colorFuente = new Color(46, 47, 47);
         equipo1.setFont(font);
         equipo2.setFont(font);
         resultadoLocal.setFont(font);
@@ -123,22 +147,17 @@ public class ControladorVUltJornada {
         equipo2.setForeground(colorFuente);
         guion.setForeground(colorFuente);
 
-        // Establecer el fondo del textfield
         resultadoLocal.setBackground(new Color(0, 255, 185));
         resultadoVisitante.setBackground(new Color(0, 255, 185));
         resultadoLocal.setForeground(colorFuente);
         resultadoVisitante.setForeground(colorFuente);
-        resultadoLocal.setEnabled(true);
-        resultadoVisitante.setEnabled(true);
-
         resultadoLocal.setEditable(false);
         resultadoLocal.setEnabled(false);
-        resultadoLocal.setBackground(new Color(46, 47, 47)); // Establecer el color de fondo
+        resultadoLocal.setBackground(new Color(46, 47, 47));
 
         resultadoVisitante.setEditable(false);
         resultadoVisitante.setEnabled(false);
-        resultadoVisitante.setBackground(new Color(46, 47, 47)); // Establecer el color de fondo
-
+        resultadoVisitante.setBackground(new Color(46, 47, 47));
 
         panel.add(equipo1);
         panel.add(resultadoLocal);
@@ -146,7 +165,6 @@ public class ControladorVUltJornada {
         panel.add(resultadoVisitante);
         panel.add(equipo2);
 
-        // Llenar los resultados si ya existen
         cv.llenarResultados(resultadoLocal, resultadoVisitante, enfrentamiento.getIdEnfJor());
 
         return panel;

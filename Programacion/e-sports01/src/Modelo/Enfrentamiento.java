@@ -1,19 +1,29 @@
 package Modelo;
 
-import java.time.LocalTime;
-
+/**
+ * Clase que representa un enfrentamiento entre dos equipos en una jornada de competición.
+ */
 public class Enfrentamiento {
+    private Equipo equipoUno; // Primer equipo que participa en el enfrentamiento
+    private Equipo equipoDos; // Segundo equipo que participa en el enfrentamiento
+    private Integer idEnfrentamiento; // Identificador único del enfrentamiento
+    private String hora; // Hora del enfrentamiento
+    private Integer resultadoLocal; // Resultado del equipo local
+    private Integer resultadoVisitante; // Resultado del equipo visitante
+    private Jornada jornada; // Jornada a la que pertenece el enfrentamiento
+    private Integer idEnfJor; // Identificador único del enfrentamiento en la jornada
+    private Integer idJorComp; // Identificador único de la jornada de competición
 
-    private Equipo equipoUno;
-    private Equipo equipoDos;
-    private Integer idEnfrentamiento;
-    private String hora;
-    private Integer resultadoLocal;
-    private Integer resultadoVisitante;
-    private Jornada jornada;
-    private Integer idEnfJor;
-    private Integer idJorComp;
-
+    /**
+     * Constructor de la clase Enfrentamiento.
+     * @param equipoUno Primer equipo que participa en el enfrentamiento.
+     * @param equipoDos Segundo equipo que participa en el enfrentamiento.
+     * @param idEnfrentamiento Identificador único del enfrentamiento.
+     * @param hora Hora del enfrentamiento.
+     * @param resultadoLocal Resultado del equipo local.
+     * @param resultadoVisitante Resultado del equipo visitante.
+     * @param jornada Jornada a la que pertenece el enfrentamiento.
+     */
     public Enfrentamiento(Equipo equipoUno, Equipo equipoDos, Integer idEnfrentamiento, String hora, Integer resultadoLocal, Integer resultadoVisitante, Jornada jornada) {
         this.equipoUno = equipoUno;
         this.equipoDos = equipoDos;
@@ -24,9 +34,12 @@ public class Enfrentamiento {
         this.jornada = jornada;
     }
 
-    public Enfrentamiento() {
+    /**
+     * Constructor por defecto de la clase Enfrentamiento.
+     */
+    public Enfrentamiento() {}
 
-    }
+    // Métodos getters y setters
 
     public Equipo getEquipoUno() {
         return equipoUno;

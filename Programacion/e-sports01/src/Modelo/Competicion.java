@@ -3,34 +3,42 @@ package Modelo;
 import java.time.LocalDate;
 import java.util.List;
 
-import java.util.ArrayList;
-
+/**
+ * Clase que representa una competición entre varios equipos.
+ */
 public class Competicion {
+    private LocalDate fechaInicio; // Fecha de inicio de la competición
+    private LocalDate fechaFin; // Fecha de finalización de la competición
+    private String estado; // Estado actual de la competición
+    private Integer idCompeticion; // Identificador único de la competición
+    private String nombre; // Nombre de la competición
+    private List<Jornada> listaJornada; // Lista de jornadas de la competición
+    private Juego juego; // Juego asociado a la competición
 
-
-    private LocalDate fechaInicio;
-    private  LocalDate fechaFin;
-    private String estado;
-    private Integer idCompeticion;
-    private String nombre;
-    private List<Jornada> listaJornada;
-    private Juego juego;
-
-
+    /**
+     * Constructor de la clase Competicion.
+     * @param idCompeticion Identificador único de la competición.
+     * @param nombre Nombre de la competición.
+     * @param fechaInicio Fecha de inicio de la competición.
+     * @param fechaFin Fecha de finalización de la competición.
+     * @param estado Estado actual de la competición.
+     */
     public Competicion(Integer idCompeticion, String nombre, LocalDate fechaInicio, LocalDate fechaFin, String estado) {
-
         this.idCompeticion = idCompeticion;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
-        this.juego = juego;
     }
 
-    public Competicion() {
-
-    }
-
+    /**
+     * Constructor de la clase Competicion.
+     * @param nombre Nombre de la competición.
+     * @param fechaIni Fecha de inicio de la competición.
+     * @param fechaFinal Fecha de finalización de la competición.
+     * @param estado Estado actual de la competición.
+     * @param juego Juego asociado a la competición.
+     */
     public Competicion(String nombre, LocalDate fechaIni, LocalDate fechaFinal, String estado, Juego juego) {
         this.nombre = nombre;
         this.fechaInicio = fechaIni;
@@ -38,6 +46,8 @@ public class Competicion {
         this.estado = estado;
         this.juego = juego;
     }
+
+    // Métodos getters y setters
 
     public LocalDate getFechaInicio() {
         return fechaInicio;

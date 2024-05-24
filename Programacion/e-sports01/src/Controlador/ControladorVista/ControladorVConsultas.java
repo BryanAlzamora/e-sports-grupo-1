@@ -10,15 +10,25 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.List;
 
+/**
+ * ControladorVConsultas controla la interacción entre la vista de consultas y el modelo de datos.
+ */
 public class ControladorVConsultas {
     private final ControladorVista cv;
     private VentanaConsultas vc;
 
-
+    /**
+     * Constructor de ControladorVConsultas.
+     *
+     * @param cv La instancia del controlador de la vista principal.
+     */
     public ControladorVConsultas(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Crea y muestra la ventana de consultas.
+     */
     public void crearMostrar() {
         vc = new VentanaConsultas();
         vc.getCbSelect().addFocusListener(new cbSeleccionar());
@@ -26,15 +36,19 @@ public class ControladorVConsultas {
         vc.setVisible(true);
     }
 
-    public class btSalirAL implements ActionListener{
-
+    /**
+     * ActionListener para el botón de salir.
+     */
+    public class btSalirAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             vc.dispose();
-
         }
     }
 
+    /**
+     * FocusListener para el combo box de selección.
+     */
     public class cbSeleccionar implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -96,13 +110,4 @@ public class ControladorVConsultas {
             }
         }
     }
-
-
 }
-
-
-
-
-
-
-

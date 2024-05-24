@@ -1,17 +1,26 @@
 package Modelo;
 
 /**
- * Asitente representa al integrante del grupo que ayuda al entrenador.
+ * Asistente representa al integrante del grupo que ayuda al entrenador.
  * @author Grupo4
  */
 public class Asistente {
-    private Integer idAsistente;
-    private String nombre;
-    private String apellido1;
-    private String apellido2;
-    private Double sueldo;
-    private Equipo equipo;
+    private Integer idAsistente; // Identificador único del asistente
+    private String nombre; // Nombre del asistente
+    private String apellido1; // Primer apellido del asistente
+    private String apellido2; // Segundo apellido del asistente
+    private Double sueldo; // Sueldo del asistente
+    private Equipo equipo; // Equipo al que pertenece el asistente
 
+    /**
+     * Constructor de la clase Asistente.
+     * @param idIntegrante Identificador único del asistente.
+     * @param nombre Nombre del asistente.
+     * @param apellido1 Primer apellido del asistente.
+     * @param apellido2 Segundo apellido del asistente.
+     * @param sueldo Sueldo del asistente.
+     * @param equipo Equipo al que pertenece el asistente.
+     */
     public Asistente(Integer idIntegrante, String nombre, String apellido1, String apellido2, Double sueldo, Equipo equipo) {
         this.idAsistente = idIntegrante;
         this.nombre = nombre;
@@ -21,9 +30,14 @@ public class Asistente {
         this.equipo = equipo;
     }
 
+    /**
+     * Constructor por defecto de la clase Asistente.
+     */
     public Asistente() {
 
     }
+
+    // Métodos getters y setters
 
     public Integer getIdIntegrante() {
         return idAsistente;

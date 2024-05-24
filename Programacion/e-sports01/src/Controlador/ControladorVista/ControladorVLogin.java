@@ -1,3 +1,6 @@
+/**
+ * Controlador para la ventana de inicio de sesión.
+ */
 package Controlador.ControladorVista;
 
 import Modelo.Usuario;
@@ -16,11 +19,17 @@ public class ControladorVLogin {
     private VentanaInicioSesion vsesion;
     private ControladorVP cvp;
 
-
+    /**
+     * Constructor de ControladorVLogin.
+     * @param cv ControladorVista asociado.
+     */
     public ControladorVLogin(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Crea y muestra la ventana de inicio de sesión.
+     */
     public void crearMostrar() {
         vsesion = new VentanaInicioSesion();
         vsesion.setVisible(true);
@@ -29,11 +38,14 @@ public class ControladorVLogin {
         vsesion.addCerrar(new bCerrarAL());
 
     }
+
+    /**
+     * ActionListener para el botón de iniciar sesión.
+     */
     public class BSesionAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Le dice al controlador de vista que la operación elegida es alta
-
 
             try{
                 String nombre = vsesion.getTextField1().getText();
@@ -41,12 +53,12 @@ public class ControladorVLogin {
 
                 if (nombre.isEmpty() || password.isEmpty())
 
-                JOptionPane.showMessageDialog(null,"Los datos de entrada son obligatorios");
+                    JOptionPane.showMessageDialog(null,"Los datos de entrada son obligatorios");
 
                 String expresionRegular = "^[A-Za-z]{3,}$";
                 Pattern patron = Pattern.compile(expresionRegular);
                 Matcher matcher = patron.matcher(nombre);
-                 if (!matcher.matches()) {
+                if (!matcher.matches()) {
                     JOptionPane.showMessageDialog(null,"El nombre no tiene el formato adecuado");
 
                 }
@@ -60,15 +72,15 @@ public class ControladorVLogin {
                             "\n un numero " +
                             "\n y un caracter especial");
                 Usuario user = cv.buscarUsuario(nombre, password);
-                   if (user.getContrasena().equals(password)){
-                       vsesion.dispose();
-                       cv.crearMostrarVPlogin(user);
-                       String tipo=user.getTipo();
-                       System.out.println(tipo);
-                   }else {
-                       UIManagerConfig.setOptionPaneBackground(Color.red);
-                       JOptionPane.showMessageDialog(null,"el usuario o la contraseña son incorrectas");
-                   }
+                if (user.getContrasena().equals(password)){
+                    vsesion.dispose();
+                    cv.crearMostrarVPlogin(user);
+                    String tipo=user.getTipo();
+                    System.out.println(tipo);
+                }else {
+                    UIManagerConfig.setOptionPaneBackground(Color.red);
+                    JOptionPane.showMessageDialog(null,"el usuario o la contraseña son incorrectas");
+                }
 
 
             }catch (Exception ex){
@@ -82,6 +94,9 @@ public class ControladorVLogin {
     }
 
 
+    /**
+     * ActionListener para el botón de ayuda.
+     */
     public class bAyudaAL implements ActionListener {
 
         @Override
@@ -90,6 +105,9 @@ public class ControladorVLogin {
         }
     }
 
+    /**
+     * ActionListener para el botón de cerrar.
+     */
     public class bCerrarAL implements ActionListener{
 
         @Override
@@ -100,3 +118,4 @@ public class ControladorVLogin {
 
 
 }
+

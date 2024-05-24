@@ -1,3 +1,6 @@
+/**
+ * Controlador para la gestión de patrocinadores.
+ */
 package Controlador.ControladorVista;
 
 import Modelo.Equipo;
@@ -16,10 +19,17 @@ public class ControladorVPatrocinador {
     private ControladorVista cv;
     private VentanaPatrocinadores vPatrocinadores;
 
+    /**
+     * Constructor de ControladorVPatrocinador.
+     * @param cv ControladorVista asociado.
+     */
     public ControladorVPatrocinador(ControladorVista cv) {
         this.cv = cv;
     }
 
+    /**
+     * Crea y muestra la ventana de gestión de patrocinadores.
+     */
     public void crearMostrar() {
         vPatrocinadores = new VentanaPatrocinadores();
         vPatrocinadores.setVisible(true);
@@ -28,7 +38,6 @@ public class ControladorVPatrocinador {
 
         vPatrocinadores.getCbDesvincular().addFocusListener(new ComboPatrocinadorElimFocusListener());
         vPatrocinadores.getCbVincular().addFocusListener(new ComboVincularFocusListener());
-        //vPatrocinadores.getCbEDPatrocinadores().addFocusListener(new ComboEditPatrocinadoresFocusListener());
 
         vPatrocinadores.addrbNuevoAL(new RbNuevoAL());
         vPatrocinadores.addrbEditarAL(new RbEditarAL());
@@ -41,6 +50,9 @@ public class ControladorVPatrocinador {
         llenarComboEquipo();
     }
 
+    /**
+     * ActionListener para el botón de volver.
+     */
     public class BVolverAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -48,6 +60,10 @@ public class ControladorVPatrocinador {
             vPatrocinadores.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de inicio.
+     */
     public class BInicioAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -55,6 +71,10 @@ public class ControladorVPatrocinador {
             vPatrocinadores.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de nuevo patrocinador.
+     */
     public class RbNuevoAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -66,6 +86,10 @@ public class ControladorVPatrocinador {
             }
         }
     }
+
+    /**
+     * ActionListener para el botón de editar patrocinador.
+     */
     public class RbEditarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -77,6 +101,10 @@ public class ControladorVPatrocinador {
             }
         }
     }
+
+    /**
+     * ActionListener para el botón de eliminar patrocinador.
+     */
     public class RbEliminarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -89,24 +117,21 @@ public class ControladorVPatrocinador {
         }
     }
 
+    /**
+     * ActionListener para el botón de aceptar.
+     */
     public class AceptarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 if (vPatrocinadores.getRbNuevo().isSelected()) {
-                    // Lógica para crear un nuevo patrocinador
                     String nombre = vPatrocinadores.getTfNombre().getText();
                     String equipo = (String) vPatrocinadores.getCbVincular().getSelectedItem();
-                  //  cv.crearPatrocinador(null, nombre);
-
                 } else if (vPatrocinadores.getRbEliminar().isSelected()) {
-                    // Lógica para eliminar un patrocinador
                     String nombre = (String) vPatrocinadores.getCbEPatrocinador().getSelectedItem();
                     String equipo = (String) vPatrocinadores.getCbDesvincular().getSelectedItem();
                     cv.eliminarPatrocinador(nombre, equipo);
-
                 } else if (vPatrocinadores.getRbEditar().isSelected()) {
-                    // Lógica para editar un patrocinador
                     String nombreNuevo = vPatrocinadores.getTfNuevoNombre().getText();
                     String nuevoEquipo = (String) vPatrocinadores.getCbVincular().getSelectedItem();
                     String nombreAntiguo = (String) vPatrocinadores.getCbEPatrocinador().getSelectedItem();
@@ -119,6 +144,9 @@ public class ControladorVPatrocinador {
         }
     }
 
+    /**
+     * FocusListener para el combo de patrocinador a eliminar.
+     */
     public class ComboPatrocinadorElimFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -132,7 +160,6 @@ public class ControladorVPatrocinador {
                 if (equiposeleccionado != null && !equiposeleccionado.isEmpty()) {
                     vPatrocinadores.getCbEPatrocinador().removeAllItems();
                     List<Patrocinador> patrocinadores = cv.llenarPatrocinadorNombre(equiposeleccionado);
-                  //  patrocinadores.forEach(patrocinador -> vPatrocinadores.getCbEPatrocinador().addItem(patrocinador.getNombre()));
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un equipo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -142,6 +169,9 @@ public class ControladorVPatrocinador {
         }
     }
 
+    /**
+     * FocusListener para el combo de equipo a vincular.
+     */
     public class ComboVincularFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -163,6 +193,9 @@ public class ControladorVPatrocinador {
         }
     }
 
+    /**
+     * FocusListener para el combo de nombre de patrocinador a editar.
+     */
     public class ComboNombrePatrocinadorEditar implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -177,8 +210,6 @@ public class ControladorVPatrocinador {
                 String equiposelecionado = (String) vPatrocinadores.getCbEDPatrocinadores().getSelectedItem();
                 if (equiposelecionado != null && !equiposelecionado.isEmpty()) {
                     List<Patrocinador> patrocinadores = cv.llenarPatrocinadorNombre(equiposelecionado);
-                   // patrocinadores.forEach(patrocinador -> vPatrocinadores.getCbEDPatrocinadores().addItem(patrocinador.getNombre());
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un equipo válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -188,14 +219,13 @@ public class ControladorVPatrocinador {
         }
     }
 
+    /**
+     * Llena los combos con los equipos disponibles.
+     */
     public void llenarComboEquipo() {
         try {
             List<Equipo> listaEquipos = cv.selectEquipo(null);
             listaEquipos.forEach(equipo -> {
-               // vPatrocinadores.getCbEquipos().addItem(equipo.getNombre());
-               // vPatrocinadores.getCbDesvincular().addItem(equipo.getNombre());
-               // vPatrocinadores.getCbVincular().addItem(equipo.getNombre());
-               // vPatrocinadores.getCbEDPatrocinadores().addItem(equipo.getNombre());
             });
         } catch (Exception ex) {
             throw new RuntimeException("Error al llenar combo de equipos", ex);

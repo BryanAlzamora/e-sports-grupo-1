@@ -1,15 +1,25 @@
 package Modelo;
 
-import java.awt.*;
-
+/**
+ * Clase que representa un entrenador.
+ */
 public class Entrenador {
-    private Integer idIntegrante;
-    private String nombre;
-    private String apellido1;
-    private String apellido2;
-    private Double sueldo;
-    private Equipo equipo;
+    private Integer idIntegrante; // Identificador único del entrenador
+    private String nombre; // Nombre del entrenador
+    private String apellido1; // Primer apellido del entrenador
+    private String apellido2; // Segundo apellido del entrenador
+    private Double sueldo; // Sueldo del entrenador
+    private Equipo equipo; // Equipo al que pertenece el entrenador
 
+    /**
+     * Constructor de la clase Entrenador.
+     * @param idIntegrante Identificador único del entrenador.
+     * @param nombre Nombre del entrenador.
+     * @param apellido1 Primer apellido del entrenador.
+     * @param apellido2 Segundo apellido del entrenador.
+     * @param sueldo Sueldo del entrenador.
+     * @param equipo Equipo al que pertenece el entrenador.
+     */
     public Entrenador(Integer idIntegrante, String nombre, String apellido1, String apellido2, Double sueldo, Equipo equipo) {
         this.idIntegrante = idIntegrante;
         this.nombre = nombre;
@@ -19,9 +29,12 @@ public class Entrenador {
         this.equipo = equipo;
     }
 
-    public Entrenador() {
+    /**
+     * Constructor por defecto de la clase Entrenador.
+     */
+    public Entrenador() {}
 
-    }
+    // Métodos getters y setters
 
     public Integer getIdIntegrante() {
         return idIntegrante;

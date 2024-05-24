@@ -1,14 +1,13 @@
+/**
+ * Controlador para la ventana principal.
+ */
 package Controlador.ControladorVista;
-
 
 import Modelo.Competicion;
 import Modelo.Equipo;
-
-import Modelo.Jornada;
 import Modelo.Usuario;
 import Vista.AccionRealizada;
 import Vista.VentanaInicioSesion;
-
 import Vista.VentanaPrincipal;
 import Vista.VistaPerfil;
 
@@ -24,13 +23,20 @@ public class ControladorVP {
     private VentanaInicioSesion vsesion;
     private AccionRealizada aRealizada;
 
-
-
+    /**
+     * Constructor de ControladorVP.
+     * @param cv ControladorVista asociado.
+     * @throws Exception Si ocurre un error al crear la ventana de inicio de sesión.
+     */
     public ControladorVP(ControladorVista cv) throws Exception {
         this.cv = cv;
         this.vsesion = new VentanaInicioSesion();
     }
 
+    /**
+     * Crea y muestra la ventana principal según el tipo de usuario.
+     * @param user Usuario que ha iniciado sesión.
+     */
     public void crearMostrar(Usuario user) {
         if (user.getTipo().equals("administrador")) {
             vp = new VentanaPrincipal();
@@ -71,12 +77,19 @@ public class ControladorVP {
         }
     }
 
+    /**
+     * ActionListener para el botón de realizada.
+     */
     public class RealizadaAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             aRealizada.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de usuarios.
+     */
     public class BusuarioAL implements ActionListener {
 
         @Override
@@ -86,6 +99,9 @@ public class ControladorVP {
         }
     }
 
+    /**
+     * ActionListener para el botón de clasificación.
+     */
     public class BClasificacionAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -93,6 +109,10 @@ public class ControladorVP {
             vp.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de insertar resultados.
+     */
     public class BInsertResultadosAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -100,6 +120,10 @@ public class ControladorVP {
             vp.dispose();
         }
     }
+
+    /**
+     * ActionListener para el botón de última jornada.
+     */
     public class BUltJornadaAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -108,15 +132,20 @@ public class ControladorVP {
         }
     }
 
+    /**
+     * ActionListener para el botón de consultas.
+     */
     public class bConsultasAL implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             cv.crearConsultas();
-
         }
     }
 
+    /**
+     * ActionListener para el botón de editar.
+     */
     public class BEditarAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -125,6 +154,9 @@ public class ControladorVP {
         }
     }
 
+    /**
+     * ActionListener para el botón de cerrar inscripciones.
+     */
     public class BCerrarInscAL implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -168,6 +200,9 @@ public class ControladorVP {
         }
     }
 
+    /**
+     * ActionListener para el botón de salir.
+     */
     public class BSalirAl implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -176,15 +211,14 @@ public class ControladorVP {
 
     }
 
+    /**
+     * ActionListener para el botón de cerrar sesión.
+     */
     public class CerrarSesionAl implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             cv.crearMostrarVinicioSesion();
             vp.dispose();
         }
     }
-
-
-
 }
