@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * La clase ControladorTablaAsistente gestiona las operaciones relacionadas con la tabla de asistentes en la base de datos.
  */
 public class ControladorTablaAsistente {
+
     private Connection con;
 
     /**

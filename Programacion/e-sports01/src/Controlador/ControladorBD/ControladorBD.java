@@ -172,7 +172,7 @@ public class ControladorBD {
      * Busca un patrocinador por su ID.
      *
      * @return El patrocinador encontrado.
-     * @throws Exception Si ocurre un error en la base de datos.
+     * @throws SQLException Si ocurre un error en la base de datos.
      */
     public List<String> buscarPatrocinador() throws SQLException {
         return ctpatrocinador.buscarPatrocinador();

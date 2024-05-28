@@ -111,7 +111,7 @@ public class ControladorTablaJugador {
     /**
      * Llena una lista de jugadores que pertenecen a un equipo seleccionado.
      *
-     * @param equiposeleccionado El nombre del equipo del que se desean obtener los jugadores.
+     * @param equiposelecionado El nombre del equipo del que se desean obtener los jugadores.
      * @return Una lista de objetos Jugador que pertenecen al equipo seleccionado.
      * @throws SQLException Si ocurre un error al ejecutar la consulta SQL.
      */

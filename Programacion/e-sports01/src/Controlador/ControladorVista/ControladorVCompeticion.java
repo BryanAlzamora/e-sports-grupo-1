@@ -94,7 +94,7 @@ public class ControladorVCompeticion {
         }
     }
     /**
-     * ActionListener para el botón de volver.
+     * ActionListener para el botón de BVolverAL.
      */
     public class BVolverAL implements ActionListener {
         @Override
@@ -128,7 +128,7 @@ public class ControladorVCompeticion {
         }
     }
     /**
-     * ActionListener para el radio button de editar.
+     * ActionListener para el radio button de RbEditarAL.
      */
     public class RbEditarAL implements ActionListener {
         @Override
@@ -274,7 +274,7 @@ public class ControladorVCompeticion {
         }
     }
     /**
-     * ComboBox para editar.
+     * ComboBox para cbEditAL.
      */
     public class cbEditAL implements ActionListener {
         @Override

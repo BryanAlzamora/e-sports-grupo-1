@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * La clase ControladorConsultas gestiona las operaciones relacionadas con la tabla de conuslta en la base de datos.
+ */
 public class ControladorConsultas {
     private Connection con;
     /**

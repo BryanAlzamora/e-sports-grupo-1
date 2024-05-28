@@ -16,9 +16,7 @@ import java.util.List;
  * Esta clase gestiona las operaciones relacionadas con la tabla de clasificación en la base de datos.
  * Permite obtener los equipos que participan en una competición específica.
  *
- * @autor Grupo4
- * @see Equipo
- * @see Jugador
+ * @author Grupo1
  */
 public class ControladorTablaClasificacion {
     private Connection con;

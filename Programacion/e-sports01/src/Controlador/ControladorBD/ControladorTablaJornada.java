@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ControladorTablaJornada {
     private Connection con;
+
     public ControladorTablaJornada(Connection con) {
         this.con = con;
     }

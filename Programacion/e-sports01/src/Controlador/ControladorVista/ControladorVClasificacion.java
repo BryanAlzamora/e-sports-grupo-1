@@ -19,6 +19,8 @@ import javax.swing.table.JTableHeader;
 
 /**
  * Controlador para la vista de clasificación.
+ * @author Grupo 1
+ * @version 1.0
  */
 public class  ControladorVClasificacion {
     private ControladorVista cv;
@@ -61,7 +63,7 @@ public class  ControladorVClasificacion {
         }
     }
     /**
-     * Clase interna que implementa ActionListener para el botón de inicio.
+     * Clase interna que implementa ActionListener para el botón de BInicioAL.
      */
     public class BInicioAL implements ActionListener {
         @Override
@@ -72,7 +74,7 @@ public class  ControladorVClasificacion {
         }
     }
     /**
-     * Clase interna que implementa ActionListener para el botón de competición.
+     * Clase interna que implementa ActionListener para el botón de BCompeticionAL.
      */
     public class BCompeticionAL implements ActionListener {
         @Override

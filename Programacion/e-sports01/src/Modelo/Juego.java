@@ -19,7 +19,7 @@ public class Juego {
      * @param empresa         La empresa desarrolladora del juego.
      * @param fechalanzamiento La fecha de lanzamiento del juego.
      * @param idJuego         El identificador del juego.
-     * @param listaCompeticion La lista de competiciones asociadas al juego.
+     *
      */
 
     public Juego(String nombre, String empresa, LocalDate fechalanzamiento, Integer idJuego) {

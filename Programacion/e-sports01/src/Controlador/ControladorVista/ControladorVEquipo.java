@@ -47,7 +47,6 @@ public class ControladorVEquipo {
     /**
      * Crea y muestra la ventana de equipos.
      *
-     * @throws Exception Si ocurre un error durante la ejecución.
      */
     public void crearMostrar()  {
         vEquipos = new VentanaEquipos();
@@ -266,7 +265,7 @@ public class ControladorVEquipo {
     /**
      * Busca los patrocinadores en la base de datos y los añade al combo correspondiente en la vista.
      *
-     * @throws Exception Si ocurre un error durante la ejecución.
+     * @throws RuntimeException Si ocurre un error durante la ejecución.
      */
     public void buscarPatrocinador() {
         try {
@@ -274,11 +273,11 @@ public class ControladorVEquipo {
             for (String nombre : listaPatrocinadores) {
                 vEquipos.getCbPatrocinador().addItem(nombre);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Error al llenar el combo box de patrocinadores", e);
         }
-
     }
+
     public  class   bAceptarEditarAL implements ActionListener{
 
         @Override

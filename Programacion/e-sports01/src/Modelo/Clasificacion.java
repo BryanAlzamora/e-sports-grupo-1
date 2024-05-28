@@ -68,8 +68,7 @@ public class Clasificacion {
     }
     /**
      * Obtiene la lista de equipos que participan en la clasificación.
-     *
-     * @return La lista de equipos.
+     * @param competicion objeto competicion
      */
     public void setCompeticion(Competicion competicion) {
         this.competicion = competicion;
